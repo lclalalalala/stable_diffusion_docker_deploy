@@ -6,15 +6,17 @@ services:
       dockerfile: Dockerfile
     image: sd_image
     container_name: sd_container
+    runtime: nvidia
+    deploy:
+      resources:
+        reservations:
+          devices:
+          - driver: nvidia
+            count: all
+            capabilities: [gpu]
     ports:
       - "${SERVICE_PORT}:7860"
     volumes:
       - "${MODEL_PATH}:/app/stable-diffusion-webui/models"
       - "${USER_DATA_PATH}:/app/user_data"
     restart: unless-stopped
-    deploy:
-      resources:
-        reservations:
-          devices:
-            - driver: nvidia
-              count: all
