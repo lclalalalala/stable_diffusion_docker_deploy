@@ -24,12 +24,12 @@
 
 # Stage 1: Install Miniconda and Python 3.10
 FROM nvidia/cuda:12.3.1-runtime-ubuntu20.04 AS builder
+WORKDIR /app
 ENV TZ=Asia/Shanghai
 RUN rm /etc/apt/sources.list.d/*
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 RUN apt-get update && apt-get install -y git wget curl \
         ffmpeg libsm6 libxext6 python3-opencv
-WORKDIR /app
 RUN wget -O /app/Miniconda_py310.sh https://repo.anaconda.com/miniconda/Miniconda3-py310_23.5.2-0-Linux-x86_64.sh
 RUN /bin/bash /app/Miniconda_py310.sh -b \
     && rm /app/Miniconda_py310.sh
@@ -43,6 +43,7 @@ RUN git clone --depth 1 https://github.com/AUTOMATIC1111/stable-diffusion-webui.
 
 # Stage 3: Final stage
 FROM nvidia/cuda:12.3.1-runtime-ubuntu20.04
+COPY ./start.sh /app/start.sh
 COPY --from=repo-cloner /app/stable-diffusion-webui /app/stable-diffusion-webui
 EXPOSE 7860
 # Add the start script as the entry point
