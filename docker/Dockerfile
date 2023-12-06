@@ -36,15 +36,11 @@ RUN /bin/bash /app/Miniconda_py310.sh -b \
 ENV PATH="/root/miniconda3/bin:${PATH}"
 RUN /root/miniconda3/bin/conda init bash
 
-# Stage 2: Clone the repository
-FROM builder AS repo-cloner
 RUN git clone --depth 1 https://github.com/AUTOMATIC1111/stable-diffusion-webui.git /app/stable-diffusion-webui
 #  && rm -rf /app/stable-diffusion-webui/models
 
-# Stage 3: Final stage
-FROM nvidia/cuda:12.3.1-runtime-ubuntu20.04
 COPY ./start.sh /app/start.sh
-COPY --from=repo-cloner /app/stable-diffusion-webui /app/stable-diffusion-webui
+# COPY --from=repo-cloner /app/stable-diffusion-webui /app/stable-diffusion-webui
 EXPOSE 7860
 # Add the start script as the entry point
 CMD [ "/bin/bash", "/app/start.sh" ]
