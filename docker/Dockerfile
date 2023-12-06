@@ -47,4 +47,4 @@ COPY ./start.sh /app/start.sh
 COPY --from=repo-cloner /app/stable-diffusion-webui /app/stable-diffusion-webui
 EXPOSE 7860
 # Add the start script as the entry point
-ENTRYPOINT [ "/bin/bash", "/app/start.sh" ]
+CMD [ "/bin/bash", "/app/start.sh" ]
