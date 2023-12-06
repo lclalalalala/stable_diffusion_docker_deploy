@@ -1,4 +1,4 @@
-FROM nvidia/cuda:latest
+FROM nvidia/cuda:12.3.1-runtime-ubi8
 WORKDIR /app
 COPY ./start.sh /app/start.sh
 ENV TZ=Asia/Shanghai
