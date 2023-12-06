@@ -7,6 +7,7 @@ RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 RUN apt-get update && apt-get install -y git wget curl \
         ffmpeg libsm6 libxext6 python3-opencv software-properties-common
 RUN add-apt-repository ppa:deadsnakes/ppa && apt-get update && apt-get install -y python3.10 python3-pip
+RUN update-alternatives --set python3 /usr/bin/python3.10
 # RUN wget -O /app/Miniconda_py310.sh https://repo.anaconda.com/miniconda/Miniconda3-py310_23.5.2-0-Linux-x86_64.sh \
 #     && bash /app/Miniconda_py310.sh -b \
 #     && rm /app/Miniconda_py310.sh
