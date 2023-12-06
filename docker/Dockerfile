@@ -24,6 +24,9 @@
 
 # Stage 1: Install Miniconda and Python 3.10
 FROM nvidia/cuda:12.3.1-runtime-ubuntu20.04 AS builder
+ENV TZ=Asia/Shanghai
+RUN rm /etc/apt/sources.list.d/*
+RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 RUN apt-get update && apt-get install -y git wget curl \
         ffmpeg libsm6 libxext6 python3-opencv
 RUN wget -O /app/Miniconda_py310.sh https://repo.anaconda.com/miniconda/Miniconda3-py310_23.5.2-0-Linux-x86_64.sh \
