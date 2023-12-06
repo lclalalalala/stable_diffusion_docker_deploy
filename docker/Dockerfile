@@ -2,7 +2,7 @@ FROM nvidia/cuda:12.3.1-runtime-ubi8
 WORKDIR /app
 COPY ./start.sh /app/start.sh
 ENV TZ=Asia/Shanghai
-RUN rm /etc/apt/sources.list.d/*
+# RUN rm /etc/apt/sources.list.d/*
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 RUN apt-get update && apt-get install -y git wget curl \
         ffmpeg libsm6 libxext6 python3-opencv
