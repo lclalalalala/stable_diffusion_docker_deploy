@@ -3,7 +3,7 @@ FROM nvidia/cuda:11.8.0-runtime-ubuntu22.04
 ARG UID
 ARG GID
 # Create a new user with the same UID and GID
-RUN groupadd -g $GID myuser && useradd -u $UID -g $GID -s /bin/bash myuser
+RUN groupadd -g $GID docker_user && useradd -u $UID -g $GID -s /bin/bash docker_user
 # Switch to the new user
 USER docker_user
 WORKDIR /app
