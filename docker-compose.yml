@@ -4,6 +4,9 @@ services:
     build:
       context: ./docker
       dockerfile: Dockerfile
+      args:
+        - UID=$(id -u)
+        - GID=$(id -g)
     image: sd_image
     container_name: sd_container
     runtime: nvidia

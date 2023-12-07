@@ -1,4 +1,11 @@
 FROM nvidia/cuda:11.8.0-runtime-ubuntu22.04
+# Accept the UID and GID as build arguments
+ARG UID
+ARG GID
+# Create a new user with the same UID and GID
+RUN groupadd -g $GID myuser && useradd -u $UID -g $GID -s /bin/bash myuser
+# Switch to the new user
+USER docker_user
 WORKDIR /app
 ENV TZ=Asia/Shanghai
 RUN rm /etc/apt/sources.list.d/*
