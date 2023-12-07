@@ -14,19 +14,17 @@ MODEL_PATH=$HOME/sd_models
 USER_DATA_PATH=$HOME/sd_user_data
 ```
 
-1. Buld image
+1. Buld and run
 ```
-docker compose build
-```
-
-2. Make it run
-```
-docker compose up -d
+export UID=$(id -u)
+export GID=$(id -g)
+docker compose up --build -d
 ```
 
-3. Update the image: rebuild the image again
+2. Update the image: rebuild the image again
 ```
-docker compose down
-docker compose build
-docker compose up -d
+export UID=$(id -u)
+export GID=$(id -g)
+docker-compose down
+docker compose up --build -d
 ```
