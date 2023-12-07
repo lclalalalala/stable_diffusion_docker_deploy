@@ -16,15 +16,11 @@ USER_DATA_PATH=$HOME/sd_user_data
 
 1. Buld and run
 ```
-export UID=$(id -u)
-export GID=$(id -g)
 docker compose up --build -d
 ```
 
 2. Update the image: rebuild the image again
 ```
-export UID=$(id -u)
-export GID=$(id -g)
 docker-compose down
 docker compose up --build -d
 ```
