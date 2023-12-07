@@ -11,7 +11,8 @@ RUN /bin/bash /app/Miniconda_py310.sh -b \
 ENV PATH="/root/miniconda3/bin:${PATH}"
 RUN /root/miniconda3/bin/conda init bash
 RUN git clone --depth 1 https://github.com/AUTOMATIC1111/stable-diffusion-webui.git /app/stable-diffusion-webui
-#  && rm -rf /app/stable-diffusion-webui/models
+#&& rm -rf /app/stable-diffusion-webui/models
+RUN chmod -R 777 /app
 COPY ./start.sh /app/start.sh
 EXPOSE 7860
 CMD [ "/bin/bash", "/app/start.sh" ]
