@@ -9,6 +9,7 @@ services:
         - GID=${GID}
     image: sd_image
     container_name: sd_container
+    user: ${UID}:${GID}
     runtime: nvidia
     deploy:
       resources:
